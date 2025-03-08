@@ -1,0 +1,24 @@
+# Pastas de build
+bin/
+obj/
+
+# Configurações do Visual Studio e Rider (se aplicável)
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs, caches e arquivos temporários
+*.log
+*.tmp
+
+# Arquivos gerados pelo dotnet
+*.dll
+*.exe
+*.pdb
+*.mdb
+
+# Dependências locais (se houver)
+packages/
