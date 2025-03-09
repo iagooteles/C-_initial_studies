@@ -17,3 +17,5 @@ Requisitos
 
 - .NET SDK instalado;
 - Editor de código como Visual Studio Code ou Visual Studio;
+
+2:11:50
