@@ -1,0 +1,2 @@
+Não é possível depositar valor menor ou igual a 0.
+Não é possível depositar valor menor ou igual a 0.
