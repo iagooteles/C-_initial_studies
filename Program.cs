@@ -1,10 +1,11 @@
 ﻿
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using Microsoft.VisualBasic;
 
 ILogger logger = new FileLogger("myPath");
-BankAccount account1 = new BankAccount("iago", 150, logger);
-BankAccount account2 = new BankAccount("bilas", 3000, logger);
+BankAccount account1 = new BankAccount("iago", 150);
+BankAccount account2 = new BankAccount("bilas", 3000);
 
 // Console.WriteLine("Saldo antes do deposito: " + account1.Balance);
 // account1.Deposit(300);
@@ -22,12 +23,25 @@ accounts.Add(account2);
 
 DataStore<int> store = new DataStore<int>();
 store.Value = 32;
-Console.WriteLine(store.Value);
+// Console.WriteLine(store.Value);
 
 var calculate = new Calculate(Sum);
 var result = calculate(10, 20);
-Console.WriteLine(result);
+// Console.WriteLine(result);
 
+// Serializer //
+
+BankAccount account3 = new BankAccount("Pan", 500);
+string json = JsonSerializer.Serialize(account3);
+Console.WriteLine(json);
+
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+BankAccount copiedBank = JsonSerializer.Deserialize<BankAccount>(json);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+Console.WriteLine("Copy: " + json);
+
+
+///////////////////////////////////////////////////////
 static int Sum(int a, int b) 
 {
     return a + b;
@@ -73,12 +87,18 @@ class BankAccount
     private decimal balance;
     private readonly ILogger logger;
 
+    public string Name 
+    {
+        get { return name; }
+        private set { name = value; }
+    }
+
     public decimal Balance 
     { 
         get { return balance; }
     }
 
-    public BankAccount(string name, decimal balance, ILogger logger) {
+    public BankAccount(string name, decimal balance) {
         if (string.IsNullOrWhiteSpace(name)) 
         {
             throw new Exception("Nome invalido.");
@@ -92,16 +112,6 @@ class BankAccount
         this.name = name;
         this.balance = balance;
         this.logger = logger;
-    }
-
-    public string GetName()
-    {
-        return name;
-    }
-
-    public void SetName(string value)
-    {
-        name = value;
     }
 
     public void Deposit(decimal amount)

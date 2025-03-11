@@ -26,4 +26,4 @@ Este repositório é um projeto simples para estudos iniciais em C#, simulando u
 - ASP.NET;
 - dot.net;
 
-2:37:00
+2:53:00
